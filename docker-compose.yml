@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET in your .env file - generate one with: openssl rand -base64 48}
+      ALLOWED_EMAIL_DOMAIN: ${ALLOWED_EMAIL_DOMAIN:-}
+      COOKIE_SECURE: ${COOKIE_SECURE:-}
+    volumes:
+      - lostfound-data:/app/data
+      - lostfound-uploads:/app/public/uploads
+    restart: unless-stopped
+
+volumes:
+  lostfound-data:
+  lostfound-uploads:
